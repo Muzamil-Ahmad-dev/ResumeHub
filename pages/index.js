@@ -1,78 +1,162 @@
-import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
+"use client";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+import Navbar from "../components/navbar/Navbar";
+import Footer from "../components/footer/Footer";
+import { motion } from "framer-motion";
+import { FaCheckCircle } from "react-icons/fa";
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
+/**
+ * Home Page
+ * -----------------------------------------------------------------------------
+ * Landing page for Resume Builder application.
+ * Features:
+ * - Hero section with heading, description, features list, and CTA buttons.
+ * - Animated elements using Framer Motion.
+ * - Responsive layout with a right-side image.
+ */
 export default function Home() {
+  /** -----------------------------------------------------------------------
+   * Animation Variants
+   * -----------------------------------------------------------------------
+   */
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+  };
+
+  /** -----------------------------------------------------------------------
+   * Features / Highlights
+   * -----------------------------------------------------------------------
+   */
+  const features = [
+    "10+ modern resume templates",
+    "Easy drag-and-drop section editing",
+    "Export to PDF or shareable link",
+    "Fully responsive and browser friendly",
+  ];
+
   return (
-    <div
-      className={`${geistSans.className} ${geistMono.className} flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black`}
-    >
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the index.js file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="min-h-screen flex flex-col bg-black/95">
+      {/* -------------------------------------------------------------------
+       * Navbar
+       * -------------------------------------------------------------------
+       */}
+      <Navbar />
+
+      {/* -------------------------------------------------------------------
+       * Hero Section
+       * -------------------------------------------------------------------
+       */}
+      <section className="relative min-h-screen bg-gradient-to-r from-black via-black to-purple-950 overflow-hidden">
+        {/* Gradient overlay for depth */}
+        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-purple-900/20 to-pink-900/30 pointer-events-none" />
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 flex flex-col md:flex-row items-center justify-between gap-12">
+          {/* Left Content */}
+          <motion.div
+            className="flex-1 z-10"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={fadeInUp}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+            {/* Badge */}
+            <motion.div
+              className="inline-flex items-center gap-3 mb-8"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <span className="text-sm font-medium text-gray-300 bg-white/10 px-3 py-1 rounded-full">
+                What's New?
+              </span>
+              <span className="text-sm text-gray-400">
+                Introducing Resume Builder 2.0
+              </span>
+            </motion.div>
+
+            {/* Main Heading */}
+            <motion.h1
+              className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6"
+              initial={{ opacity: 0, y: -50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
+            >
+              <span className="text-white">Build your professional</span>
+              <br />
+              <span className="bg-gradient-to-r from-purple-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                resume in minutes
+              </span>
+            </motion.h1>
+
+            {/* Description */}
+            <motion.p
+              className="text-lg text-gray-400 max-w-xl mb-8 leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              Resume Builder is a simple, intuitive web app that helps you create professional resumes quickly.
+              Choose from templates, customize your sections, and export your resume as PDF—all in one place.
+            </motion.p>
+
+            {/* Features List */}
+            <motion.ul
+              className="text-gray-300 space-y-2 mb-8"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              {features.map((item, index) => (
+                <li key={index} className="flex items-center gap-2">
+                  <FaCheckCircle className="text-purple-500" />
+                  {item}
+                </li>
+              ))}
+            </motion.ul>
+
+            {/* Call-to-Action Buttons */}
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-3 bg-white text-black font-semibold rounded-lg hover:bg-gray-100 transition-colors duration-200"
+              >
+                Get Started
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-3 border border-gray-600 text-white font-semibold rounded-lg hover:border-gray-400 hover:bg-white/5 transition-colors duration-200"
+              >
+                View Templates
+              </motion.button>
+            </motion.div>
+          </motion.div>
+
+          {/* Right Content - Hero Image */}
+          <motion.div
+            className="flex-1 flex justify-center md:justify-end z-10"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: 0.5 }}
+          >
+            <img
+              src="/Resume-hero.jpg"
+              alt="Resume preview"
+              className="max-w-md w-full rounded-xl shadow-2xl"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs/pages/getting-started?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          </motion.div>
         </div>
-      </main>
+      </section>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
