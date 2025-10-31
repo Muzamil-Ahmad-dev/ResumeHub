@@ -24,7 +24,7 @@ export default function Footer() {
               href="/"
               className="text-xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"
             >
-              ResumeBuilder
+              ResumeHub
             </Link>
           </div>
 
@@ -96,7 +96,7 @@ export default function Footer() {
       {/* Footer Bottom: Copyright Notice */}
       {/* -------------------------------------------------------------------------- */}
       <div className="border-t border-white/10 mt-8 pt-6 text-sm text-gray-400 text-center">
-        &copy; {new Date().getFullYear()} Resume Builder. All rights reserved.
+        &copy; {new Date().getFullYear()} ResumeHub. Built by Muzamil Ahmad. All rights reserved.
       </div>
     </footer>
   );
